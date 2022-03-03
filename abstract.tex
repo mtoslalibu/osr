@@ -1,0 +1,17 @@
+Developers use logs to diagnose performance problems in distributed
+  applications.  However, it is difficult to know a priori where logs
+  are needed and what information in them is needed to help diagnose
+  problems that may occur in the future.  We present the
+  \underline{V}ariance-driven \underline{A}utomated
+  \underline{I}nstrumentation \underline{F}ramework (\STAIF{}), which
+  runs alongside distributed applications.  In response to
+  newly-observed performance problems, \STAIF{} automatically searches
+  the space of possible instrumentation choices to enable the logs
+  needed to help diagnose them. 
+  To work, \STAIF{} combines distributed tracing (an enhanced form of logging) with insights
+  about how response-time variance can be decomposed on the
+  critical-path portions of requests' traces.  We evaluate \STAIF{} by
+  using it to localize performance problems in OpenStack.  We
+  show that \STAIF{} can localize problems related to slow code paths,
+  resource contention, and problematic third-party code while enabling
+  only 3-34\% of the total tracing instrumentation.

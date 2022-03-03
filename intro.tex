@@ -1,0 +1,126 @@
+
+Logs are the de-facto data source engineers use to diagnose
+performance problems in deployed distributed applications.  However, it is
+difficult to know a priori \textit{where} logs are needed to help
+diagnose problems that may occur in the future~\cite{Zhao:2017co,
+  Yuan:2012eh, Yuan:2012ws, Mace:2015uh}.  Exhaustively recording all
+possible distributed-application behaviors is infeasible due to the
+resulting overheads.  As a result of these issues, distributed
+applications can contain lots of log statements, but rarely the right
+ones in the locations needed to diagnose a specific
+problem~\cite{Mace:2015uh, Yuan:2012eh}. New performance problems
+cannot be diagnosed quickly because the detailed logs needed to locate
+their sources are not present.
+
+Diagnosing problems observed in deployment requires the ability to
+customize logging choices during runtime.  Two sets of complementary
+techniques allow for such customization: dynamic logging and automated
+control of logging choices.  The former allows developers to insert
+new logs in pre-defined~\cite{Erlingsson:2011wy,Mace:2015uh,
+  Cantrill:2004dtrace} or almost arbitrary locations~\cite{kprobes} of
+an application.  But, it can result in high diagnosis times because
+engineers must manually explore the vast space of possible logging
+choices to locate the source of the problem.  Only after doing so can
+they identify the problem's root cause and fix it.
+
+To reduce diagnosis times, researchers have developed automated
+techniques to choose the needed logs~\cite{Zhao:2017co,
+  ArumugaNainar:2010fx, Zuo:2016et, Liblit:2003ko, Ding:2015td}. However,
+they focus on correctness problems, not performance, or are designed
+for individual processes, not distributed
+applications.  For example, Log20~\cite{Zhao:2017co} helps diagnose
+non-fail-stop correctness problems by enabling logs to differentiate
+unique code paths.  However, fast code paths need not be differentiated
+for performance problems, and slow ones may need additional logs to
+further pinpoint the problem source.
+Log\textsuperscript{2}~\cite{Ding:2015td} identifies which logs
+provide insight into performance problems in
+individual processes. Its value is
+  diminished for distributed applications because it is unaware of
+  slow requests' workflows---i.e., the application processes involved
+  in servicing them.
+
+% to store long term, not which ones to enable in the first place.
+This paper's goal is to create a logging framework that automatically
+enables the logs needed to diagnose performance problems in
+request-based distributed applications.  We find that the combination
+of three insights about the critical-path sections of requests
+workflows, distributed tracing (an enhanced form of logging),
+and requests' performance variance makes such a framework possible.
+
+The insights are as follows.  First, in many distributed applications,
+requests whose workflows are \textit{expected} to have similar
+critical paths should perform similarly~\cite{Sambasivan:2012wv}.  If
+they do not---i.e., they exhibit high response-time variance---the
+expectation is incorrect, and there is something unknown about their
+critical paths.  This unknown behavior may be performance problems,
+such as slow functions, resource contention, or load imbalances.
+Second, distributed tracing captures graphs (traces) of requests'
+workflows with resolution equal to the number of logging points in the
+application. (Distributed tracing calls log points tracepoints.)
+Third, high response-time variance can be localized to sources of high
+variance within critical-path portions of requests' workflow traces,
+giving insight into where more tracepoints must be enabled to explain
+the unknown behavior.  For problems that manifest as consistently-slow
+requests instead of high variance ones, a similar process that focuses
+on high-latency areas of critical paths can be used.
+
+We present the design of the \underline{V}ariance-driven
+\underline{A}utomated \underline{I}nstrumentation
+\underline{F}ramework (\STAIF{}).  \STAIF{} is comprised of a
+distributed-tracing infrastructure that allows tracepoints to be
+enabled or disabled and control logic that decides where to enable
+tracepoints based on the performance-variation insights.  It uses
+various search strategies (e.g., binary search) to decide which
+tracepoints to enable.  During normal operation, \STAIF{} operates
+identically to distributed tracing today and generates traces with a
+default level of tracepoints enabled.  When developers must diagnose
+why requests are slow, they ``push a button'' and \STAIF{}
+automatically explores which additional tracepoints must be enabled to
+locate the problem source.  Similar to dynamic instrumentation,
+\STAIF{}'s approach reduces the burden of deciding which logs to
+enable a priori.  It additionally eliminates the manual effort
+required to search the space of possible tracepoint choices.
+
+We implemented two prototype \STAIF{}s for OpenStack~\cite{Openstack}
+and HDFS~\cite{HDFS} by modifying their existing tracing
+implementations.  In both applications, we find that our prototypes
+can enable tracepoints to locate the sources of real and synthetically
+injected sources of variance and latency even when only a minimal
+number of tracepoints are enabled by default.  We find that many real
+sources of variance and latency correspond to bug reports in developer
+mailing lists.  Our prototypes only enable 3-37\% of the tracepoints
+they could enable to localize these issues.
+
+We present the following contributions.
+%
+\begin{enumerate}[leftmargin=*]
+  \itemsep 0pt
+   \item We identify requirements for any logging (or tracing)
+   infrastructure must satisfy to address key challenges that limit
+   their utility for localizing problems.  We identify insights that
+   allow these challenges to be addressed for performance problems
+   related to slow code paths, code with unpredictable performance,
+   and resource contention.
+     
+   \item Building on the insights, we present the design of \STAIF{},
+     an automated instrumentation framework that combines distributed
+     tracing with control logic that automatically enables the
+     tracepoints needed to localize new performance problems.
+     \STAIF{}'s control-logic components are modular and can be
+     applied to different distributed applications instrumented with
+     tracing without modifications.  Our \STAIF{} design includes elements
+     to make it practically useful: a novel data structure for
+     explaining \STAIF{}'s tracepoint decisions to developers and
+     mechanisms to limit \STAIF{}'s explorations when resources
+     available to tracing are constrained.
+
+   \item We demonstrate the efficacy of our \STAIF{}
+     prototype by using them to localize sources of high
+     variance and consistently-slow performance in OpenStack.
+    %  We believe six of them correspond to real bugs reported on
+    %  developer mailing lists.  
+    We find that those localized regions correspond to bug reports in developer mailing lists.
+
+
+\end{enumerate}

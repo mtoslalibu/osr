@@ -1,0 +1,226 @@
+\begin{thebibliography}{10}
+
+\bibitem{listslow1}
+Nova list is extremely slow with lots of vms.
+\newblock \url{https://bugs.launchpad.net/nova/+bug/1160487}, 2016.
+
+\bibitem{listslow2}
+Openstack identity service is responding slowly.
+\newblock
+  \url{https://docs.openstack.org/operations-guide/ops-maintenance-slow.html},
+  2016.
+
+\bibitem{vifplug1}
+Ovs plugin vif plugging slow for vms.
+\newblock
+  \url{https://ask.openstack.org/en/question/128160/ovs-plugin-vif-plugging-slow-for-vms-with-multiple-nics/},
+  2016.
+
+\bibitem{vifplug2}
+Update on os-vif progress.
+\newblock
+  \url{https://openstack-dev.openstack.narkive.com/gLpnyrJl/nova-neutron-update-on-os-vif-progress-port-binding-negotiation},
+  2016.
+
+\bibitem{ArumugaNainar:2010fx}
+Piramanayagam~Nainar Arumuga and Ben Liblit.
+\newblock {Adaptive bug isolation}.
+\newblock In {\em International Conference on Software Engineering}, pages
+  255--264, New York, New York, USA, 2010. ACM Press.
+
+\bibitem{Cantrill:2004dtrace}
+Bryan Cantrill, Michael~W. Shapiro, and Adam~H. Leventhal.
+\newblock Dynamic instrumentation of production systems.
+\newblock In {\em ATC '04: Proceedings of the 2004 USENIX Annual Technical
+  Conference}, 2004.
+
+\bibitem{Chow:2014ts}
+Michael Chow, David Meisner, Jason Flinn, Daniel Peek, and Thomas~F Wenisch.
+\newblock {The mystery machine: end-to-end performance analysis of large-scale
+  internet services}.
+\newblock In {\em OSDI' 14: Proceedings of the 11th USENIX conference on
+  Operating Systems Design and Implementation}, 2014.
+
+\bibitem{CockroachDB}
+{CockroachDB}.
+\newblock \url{https://www.cockroachlabs.com/}, 2019.
+
+\bibitem{Ding:2015td}
+Rui Ding, Hucheng Zhou, Jian-Guang Lou, Hongyu Zhang, Qingwei Lin, Qiang Fu,
+  Dongmei Zhang, and Tao Xie.
+\newblock Log\textsuperscript{2}: A cost-aware logging mechanism for
+  performance diagnosis.
+\newblock In {\em ATC '15: Proceedings of the 2015 USENIX Annual Technical
+  Conference}, 2015.
+
+\bibitem{Kiciman2005a}
+Kiciman Emre and Lakshminarayanan Subramanian.
+\newblock Root cause localization in large scale systems.
+\newblock In {\em Root cause localization in large scale systems}, volume Proc.
+  1st Workshop on Hot Topics in Systems Dependability (HotDep), 2005.
+
+\bibitem{Erlingsson:2011wy}
+Ulfar Erlingsson, Marcus Peinado, Simon Peter, and Mihai Budiu.
+\newblock {Fay: extensible distributed tracing from kernels to clusters}.
+\newblock In {\em SOSP '11: Proceedings of the 23\textsuperscript{nd} ACM
+  Symposium on Operating Systems Principles}, 2011.
+
+\bibitem{Fonseca:2010vn}
+Rodrigo Fonseca, Michael~J. Freedman, and George Porter.
+\newblock {Experiences with tracing causality in networked services}.
+\newblock In {\em INM/WREN '10: Proceedings of the 1\textsuperscript{st}
+  Internet Network Management Workshop/Workshop on Research on Enterprise
+  Monitoring}, 2010.
+
+\bibitem{kprobes}
+Sudhanshu Goswami.
+\newblock \url{https://lwn.net/Articles/132196/}, 2005.
+
+\bibitem{Kaldor:2017gp}
+Jonathan Kaldor, Jonathan Mace, Micha{\l} Bejda, Edison Gao, Wiktor Kuropatwa,
+  Joe O'Neill, Kian~Win Ong, Bill Schaller, Pingjia Shan, Brendan Viscomi,
+  Vinod Venkataraman, Kaushik Veeraraghavan, and Yee~Jiun Song.
+\newblock {Canopy: An end-to-end performance tracing and analysis system}.
+\newblock In {\em SOSP '17: Proceedings of the 26th Symposium on Operating
+  Systems Principles}, 2017.
+
+\bibitem{Liblit:2003ko}
+Ben Liblit, Alex Aiken, Alice~X Zheng, and Michael~I Jordan.
+\newblock Bug isolation via remote program sampling.
+\newblock In {\em PLDI '03: Programming Language Design and Implementation}.
+  ACM, 2003.
+
+\bibitem{Mace2017survey}
+Jonathan Mace.
+\newblock {End-to-End Tracing: Adoption and Use Cases}.
+\newblock {Survey}, Brown University, 2017.
+\newblock \url{https://cs.brown.edu/~jcmace/papers/mace2017survey.pdf}.
+
+\bibitem{Mace:ui}
+Jonathan Mace and Rodrigo Fonseca.
+\newblock Universal context propagation for distributed system instrumentation.
+\newblock In {\em {EuroSys'18:} Proceedings of the Thirteenth EuroSys
+  Conference}, 2018.
+
+\bibitem{Mace:2015uh}
+Jonathan Mace, Ryan Roelke, and Rodrigo Fonseca.
+\newblock {Pivot Tracing}: dynamic causal monitoring for distributed systems.
+\newblock In {\em SOSP '15: Proceedings of the 25th Symposium on Operating
+  Systems Principles}, 2015.
+
+\bibitem{Mann:2011vf}
+Gideon Mann, Mark Sandler, Darja Krushevskaja, Sudipto Guha, and Eyal Even-dar.
+\newblock Modeling the parallel execution of black-box services.
+\newblock In {\em Proceedings of the 3\textsuperscript{rd} USENIX Workshop on
+  Hot Topics in Cloud Computing}, 2011.
+
+\bibitem{Openstack}
+Openstack web site.
+\newblock \url{https://www.openstack.org}.
+
+\bibitem{opentelemetry}
+{{OpenTelemetry} website}.
+\newblock \url{http://opentelemetry.io/}.
+
+\bibitem{Parker}
+Austin Parker, Daniel Spoonhower, Jonathan Mace, Ben Sigelman, and Rebecca
+  Isaacs.
+\newblock {\em Distributed tracing in practice: Instrumenting, analyzing, and
+  debugging microservices}.
+\newblock O'Reilly Media, 2020.
+
+\bibitem{Rabkin:2013wy}
+A.~{Rabkin} and R.~H. {Katz}.
+\newblock How hadoop clusters break.
+\newblock {\em IEEE Software}, 30(4):88--94, 2013.
+
+\bibitem{Sambasivan:2012wv}
+Raja~R. Sambasivan and Gregory~R. Ganger.
+\newblock {Automated diagnosis without predictability is a recipe for failure}.
+\newblock In {\em Proceedings of the 4th USENIX conference on Hot Topics in
+  Cloud Computing}, pages 21--21. USENIX Association, June 2012.
+
+\bibitem{Sambasivan:2016bo}
+Raja~R. Sambasivan, Ilari Shafer, Jonathan Mace, Benjamin~H Sigelman, Rodrigo
+  Fonseca, and Gregory~R. Ganger.
+\newblock {Principled workflow-centric tracing of distributed systems}.
+\newblock In {\em SoCC '16: Proceedings of the Seventh Symposium on Cloud
+  Computing}, 2016.
+
+\bibitem{Sambasivan:2011vw}
+Raja~R. Sambasivan, Alice~X. Zheng, Michael De~Rosa, Elie Krevat, Spencer
+  Whitman, Michael Stroucken, William Wang, Lianghong Xu, and Gregory~R.
+  Ganger.
+\newblock {Diagnosing performance changes by comparing request flows}.
+\newblock In {\em NSDI'11: Proceedings of the 8\textsuperscript{th} USENIX
+  Conference on Networked Systems Design and Implementation}, 2011.
+
+\bibitem{Shkuro}
+Yuri Shkuro.
+\newblock {\em Mastering Distributed Tracing: Analyzing performance in
+  microservices and complex systems}.
+\newblock Packt Publishing Ltd, 2019.
+
+\bibitem{Sigelman:2010uj}
+Benjamin~H. Sigelman, Luiz~A. Barroso, Michael Burrows, Pat Stephenson, Manoj
+  Plakal, Donald Beaver, Saul Jaspan, and Chandan Shanbhag.
+\newblock {Dapper, a large-scale distributed systems tracing infrastructure}.
+\newblock Technical Report dapper-2010-1, Google, April 2010.
+
+\bibitem{HDFS}
+The apache hadoop distributed file system, 2013.
+\newblock \url{http://hadoop.apache.org/hdfs/}.
+
+\bibitem{Vef:2018bx}
+Marc-Andr{\'e} Vef, Vasily Tarasov, Dean Hildebrand, and Andr{\'e} Brinkmann.
+\newblock Challenges and solutions for tracing storage systems: A case study
+  with spectrum scale.
+\newblock {\em ACM Transactions on Storage (TOS)}, 14(2):18--24, May 2018.
+
+\bibitem{stats_textbook}
+Larry Wasserman.
+\newblock {\em All of Statistics: A Concise Course in Statistical Inference}.
+\newblock Springer Publishing Company, Incorporated, 2010.
+
+\bibitem{Weil:2006ti}
+Sage~A Weil, Scott~A Brandt, Ethan~L Miller, Darrell D~E Long, and Carlos
+  Maltzahn.
+\newblock {Ceph}: a scalable, high-performance distributed file system.
+\newblock In {\em OSDI '06: Proceedings of the 7\textsuperscript{th} USENIX
+  Symposium on Operating Systems Design and Implementation}, 2006.
+
+\bibitem{Yuan:2010ww}
+Ding Yuan, Haohui Mai, Weiwei Xiong, Lin Tan, Yuanyuan Zhou, and Shankar
+  Pasupathy.
+\newblock {SherLog: error diagnosis by connecting clues from run-time logs}.
+\newblock In {\em ASPLOS '10: Proceedings of the Fifteenth Edition of ASPLOS on
+  Architectural Support for Programming Languages and Operating Systems}, 2010.
+
+\bibitem{Yuan:2012ws}
+Ding Yuan, Soyeon Park, Peng Huang, Yang Liu, Michael~M Lee, Xiaoming Tang,
+  Yuanyuan Zhou, and Stefan Savage.
+\newblock {Be conservative: enhancing failure diagnosis with proactive
+  logging}.
+\newblock In {\em OSDI' 12: Proceedings of the 10th conferences on Operating
+  Systems Design {\&} Implementation}, 2012.
+
+\bibitem{Yuan:2012eh}
+Ding Yuan, Jing Zheng, Soyeon Park, Yuanyuan Zhou, and Stefan Savage.
+\newblock {Improving software diagnosability via log enhancement}.
+\newblock {\em ACM SIGPLAN Notices}, 47(4):3--14, June 2012.
+
+\bibitem{Zhao:2017co}
+Xu~Zhao, Kirk Rodrigues, Yu~Luo, Michael Stumm, Ding Yuan, and Yuanyuan Zhou.
+\newblock Log20: Fully automated optimal placement of log printing statements
+  under specified overhead threshold.
+\newblock In {\em SOSP '17: Proceedings of the 26th Symposium on Operating
+  Systems Principles}, 2017.
+
+\bibitem{Zuo:2016et}
+Zhiqiang Zuo, Lu~Fang, Siau-Cheng Khoo, Guoqing Xu, and Shan Lu.
+\newblock Low-overhead and fully automated statistical debugging with
+  abstraction refinement.
+\newblock In {\em OOPSLA '16: Proceedings of the ACM international conference
+  on Object oriented programming systems languages and applications}, 2016.
+
+\end{thebibliography}

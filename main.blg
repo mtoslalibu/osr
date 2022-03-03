@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: plain.bst
+Database file #1: main.bib
+Warning--to sort, need author or key in vifplug1
+Warning--to sort, need author or key in vifplug2
+Warning--to sort, need author or key in listslow1
+Warning--to sort, need author or key in listslow2
+You've used 37 entries,
+            2118 wiz_defined-function locations,
+            694 strings with 11711 characters,
+and the built_in function-call counts, 11739 in all, are:
+= -- 1015
+> -- 742
+< -- 4
++ -- 298
+- -- 260
+* -- 784
+:= -- 1953
+add.period$ -- 106
+call.type$ -- 37
+change.case$ -- 240
+chr.to.int$ -- 0
+cite$ -- 41
+duplicate$ -- 445
+empty$ -- 957
+format.name$ -- 260
+if$ -- 2449
+int.to.chr$ -- 0
+int.to.str$ -- 37
+missing$ -- 29
+newline$ -- 180
+num.names$ -- 60
+pop$ -- 367
+preamble$ -- 1
+purify$ -- 207
+quote$ -- 0
+skip$ -- 277
+stack$ -- 0
+substring$ -- 292
+swap$ -- 72
+text.length$ -- 4
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 142
+warning$ -- 4
+while$ -- 71
+width$ -- 39
+write$ -- 366
+(There were 4 warnings)

@@ -1,0 +1,351 @@
+This section introduces these challenges and derives requirements that any instrumentation framework should satisfy.
+
+\subsection{Challenges}
+Past research has identified three challenges with logging for localizing problems, that is, giving developers strong starting points for their diagnosis efforts ~\cite{Kiciman2005a}. 
+The challenges are: 
+1) No perfect one-size-fits-all logs leading to a tussle between informativeness and cost (e.g., overhead), 
+2) Extremely large log search spaces, and
+3) Data overload leading to a needle-in-the-haystack problem.
+
+We argue that these challenges must be addressed
+separately for correctness and performance problems as logging for these two classes have different goals.
+Logging for correctness must identify the first divergence from normal execution that
+leads to problematic regions in the code ~\cite{ArumugaNainar:2010fx,
+Yuan:2012eh, Yuan:2010ww, Zuo:2016et}. 
+In comparison, logging for performance must identify regions of the code or resource conditions that lead requests' end to end execution to be slow.
+
+We describe the challenges below and identify requirements they impose
+on logging frameworks.
+
+\noindent\textbf{No perfect one-size-fits-all instrumentation leading to
+  a tussle between logging generality and overhead} 
+  
+Past research has argued that the logs needed to localize the
+source of one problem may not be useful for others~\cite{Mace:2015uh,
+  Yuan:2012eh, Zhao:2017co, Vef:2018bx}.  
+The lack of one-size-fits-all logs leads to a tussle to identify which
+log statements are most useful and should be enabled by default.  For
+example, Zhao et al.~\cite{Zhao:2017co} state that Hadoop, HBase, and
+Zookeeper have been patched over 28,821 times over their lifetimes to
+add, remove, or modify static log statements embedded in their code.
+They also point out that the 2,105 revisions that modify logs'
+verbosity levels reflect the tussle between a desire to balance
+overhead and informativeness of log statements.
+
+This challenge results in the following requirement: 
+\begin{description}%[leftmargin=*]
+    \itemsep 0 pt
+  \item[\textit{R1}] \textit{Logging frameworks must allow logs to be
+    enabled selectively by developers during runtime or must
+    automatically enable logs in response to problems observed during runtime.}
+  \end{description}
+
+
+  \noindent\textbf{Extremely large logging search spaces} Assume a
+distributed application that allows log points to be inserted or
+enabled at every function's entry, exit, and exceptional return. (This
+is similar to the distributed applications used by Mace et
+al.~\cite{Mace:2015uh} and Erlingsson et
+al.~\cite{Erlingsson:2011wy}.)  Here, the possible locations where log
+statements can be enabled is a function of the number of procedures in
+the applications' code base and the number of machines on which the
+application executes.  Even modestly-sized distributed applications
+can have search spaces with 100s or 1000s of possible log points.
+
+To address this scalability challenge, we refine \textit{R1} to
+require logging frameworks to automatically enable tracepoints.  We
+add a requirement stating that frameworks must
+automatically narrow down the search space when exploring new
+problems.
+
+\begin{description}%[leftmargin=*]
+    \itemsep 0 pt
+  \item[\textit{R2}] \textit{Automated Logging frameworks must 
+    be capable of narrowing down the search space when exploring what
+    logs are needed to localize a newly-observed problem.} 
+  \end{description}
+
+
+  \noindent\textbf{Data overload amounting to needle-in-a-haystack problem}
+Existing logging infrastructures capture voluminous amounts of data.
+For example, Facebook's Canopy, a distributed-tracing infrastructure
+captures 1.16 GB/s of trace data and individual traces contain
+1000s of tracepoints~\cite{Kaldor:2017gp}.  Problem diagnosis, even
+when the needed instrumentation is present, can be trying to
+find a needle in a haystack~\cite{Rabkin:2013wy}.
+
+This challenge is partially addressed by \textit{R1 (automatically
+  choose what instrumentation to enable)}.  To avoid the needle-in-haystack
+problem for cases where there may be multiple problems in the
+application simultaneously, we add the following requirement.
+
+%\vspace{-0.1in}
+\begin{description}%[leftmargin=*]
+  \itemsep 0 pt \item[\textit{R3}] \textit{Automated logging
+  frameworks must be capable of explaining their logging decisions.}
+
+\end{description}
+
+
+\subsection{Key insights}
+\label{sec:motivaton:insights}
+
+We discuss insights that let us address the requirements and
+discuss how the requirements are addressed next.
+
+The first insight is that in many distributed applications, requests
+with similar critical paths---i.e., requests that are processed
+similarly by the distributed application---will have similar response
+times.  An existing use of this insight involves using separate
+performance counters for different request types or API calls, such as
+\textsc{read}s and \textsc{get attributes} in a distributed-storage
+application.  Separate counters are used because there is an
+expectation that requests of different types will have very different
+critical paths and thus have different response times.
+
+The second insight is that distributed
+tracing~\cite{Sambasivan:2016bo, Parker, Shkuro}, which is an enhanced
+form of logging, can identify requests' critical paths with resolution
+equal to the amount of tracing instrumentation present.  This is
+because it records graphs (called \textit{traces}) of requests
+workflows.  Today, distributed tracing is becoming increasingly
+popular and an ever growing number of distributed applications are
+being instrumented with it~\cite{HDFS, CockroachDB, Weil:2006ti,
+  Openstack, Kaldor:2017gp, Sigelman:2010uj, Mace2017survey}.
+
+This insight combined with the previous one means that that if
+requests' whose workflow traces have identical critical paths
+\textit{do not} perform similarly---i.e, their response time variance
+is high---there is some unknown behavior that is not captured in their
+traces.  This behavior may represent performance problems, such as
+slow code paths or functions executing, differences in resources used
+or available to requests, poorly-written algorithms that
+unintentionally increase variance, or third-party code with
+unpredictable performance.
+
+
+% Figure~\ref{fig:dist_app_tracing_background} shows how most
+% distributed-tracing infrastructures work.  \textit{(1)} Tracing
+% infrastructures propagate per-request \textit{context}---unique
+% request IDs and logical clocks---along with requests' execution (shown
+% by the baggage tags in the figure).  \textit{(2)} They tag records of
+% logging points executed by requests with requests' context. (Logging
+% points that record context are called \textit{tracepoints} and shown
+% by rounded rectangles in the figure.)  \textit{(3)} To avoid impacting
+% performance, tracepoint records are cached in fixed-size memory
+% buffers within local \textit{tracing agents}.  They are flushed to a
+% centralized
+% \textit{collector} periodically or when the system is idle.
+% \textit{(4)} Asynchronously, a big-data collects tracepoint records
+% from the collector and orders ones with the same request ID to create
+% traces of requests' workflows.
+
+% Tracepoints contain a name describing the behavior they record (e.g.,
+% \textsc{VM\_LIST\_START}) in OpenStack or \textsc{CACHE\_MISS} in a
+% storage system.  They also contain an arbitrary number of key/value
+% pairs, which are used by developers to record request/function
+% parameters , or information about resources used/available at the time
+% of requests' execution.  %Examples may include queue
+% %lengths at shared resources, the machine on which work is executing,
+% %or the current CPU utilization.
+
+% In this paper, we represent request workflow traces as
+% directed-acyclic graphs in which nodes are tracepoint names and edges
+% are happens-before relationships between events.  Graphs are labeled
+% with requests' response times and edges are labeled with inter-tracepoint
+% latencies.  Fan-outs in the graphs represent concurrent activity
+% and fan-ins represent synchronization.  Hierarchical caller/callee
+% relationships between groups of tracepoints are either represented by
+% additional \textit{hierarchical edges} or inferred by the nesting of
+% START-\newline/END annotations within tracepoint names.  This representation is
+% sufficient to express relationships created by all current tracing
+% infrastructures.
+
+The third insight is that the law of total
+variation~\cite{stats_textbook} can be applied to traces of requests'
+critical paths.  For a set of requests whose trace critical paths
+appear identical as per the enabled tracepoints, this equation can be
+interpreted as follows.  The variance of requests' response times is
+the variance of the latencies of their critical-path trace edges plus
+their covariances.
+
+%This law states that the variance
+%of a sum of random variables is the same as the sum of their variances
+%plus their pairwise covariances. 
+
+This insight means that we can identify areas in the codebase in which
+unknown behavior resides by identifying the edges of requests'
+critical-path traces that contribute most to the variance.  The
+unknown, potentially problematic behavior resides within the code
+regions that execute between the tracepoints that form these edges.
+
+
+\subsection{Addressing the requirements}
+\label{sec:motivation:guiding_principles}
+
+Based on the insights, the requirements can be satisfied for many
+classes of performance problems by combining two technologies.  The
+first is a distributed-tracing infrastructure that allows tracepoints
+to be selectively enabled or disabled during runtime.  The second is a
+control mechanism for distributed tracing that automatically enables
+tracepoints and considers key/value pairs exposed in them
+to \textit{explain} variance as per the insights above.  The control
+logic includes additional principles to diagnose problems that result
+identical critical paths having low variance but are very slow and to
+explain its decisions.  We describe the principles of this control
+mechanism below.  We use the term critical-path traces to refer to the
+critical path portions of requests workflows.  We define identical
+critical path traces as those which execute the same tracepoints in
+the same order and whose nodes have identical names.
+
+%\input{table_requirements}
+
+\noindent\textbf{Principle \#1} Identify requests whose traces exhibit
+identical critical paths, but which exhibit high response-time
+variance. Identify edges of their traces' critical paths that
+contribute most to the variance.  Enable additional tracepoints in
+the code regions corresponding to these areas.
+
+Principle one differentiates slow code paths from fast ones and/or
+isolates code with unpredictable performance.  It addresses
+\textit{R1: enable tracepoints (logs) automatically in response to
+  problems} and \textit{R2: narrow down the search space}.
+
+%observed during runtime
+
+This principle is a direct application of the law of total variation
+to critical-path traces.  Applying this law narrows down the search
+space to tracepoints that can execute between the critical-path trace
+edges that contribute most to response-time variance (\textit{R2}).
+Enabling some tracepoints in this area adds them to future traces,
+either differentiating critical-path traces further to separate fast
+ones from slow ones or further isolating areas from which high
+variance arises.
+
+%Such variance may be due to black-box
+%third-party code, problematic algorithms, or code areas that do not have
+%sufficient instrumentation to distinguish different behaviors.%
+
+Iteratively applying this principle until requests with identical
+critical-path traces exhibit low response-time variation or until no
+additional tracepoints can be enabled accomplishes the
+following.  \textit{1)} It sufficiently differentiates fast critical
+paths from slow ones or
+\textit{2)} isolates high variance coming from black-box third-party
+code, problematic algorithms, or differences in resource
+usage/availability (\textit{R1}).
+
+% \textit{Example of differentiating slow critical paths from fast ones}:
+% Figure~\ref{fig:differentiating_workflows} shows three groups of
+% identical critical-path traces from a distributed-storage system,
+% similar to Ceph~\cite{Weil:2006ti} or HDFS~\cite{HDFS}.  Nodes
+% indicate tracepoint names and edges indicate happens-before
+% relationships.  Edges are annotated with distributions of edge
+% latencies.  In Figure~\ref{fig:differentiating_workflows_undiff}, the
+% response-time variance of \textsc{read} requests with identical
+% critical-path traces is high.  The figure shows that the trace edge
+% spanning storage node accesses is the dominant contributor to
+% response-time variance.
+% Figure~\ref{fig:differentiating_workflows_cache_hit}
+% and~\ref{fig:differentiating_workflows_cache_miss} shows that enabling
+% tracepoints to differentiate cache hits from misses distinguishes fast
+% critical paths (cache hits) from consistently slow ones.  (The figures
+% show normal distributions, but our principles hold for arbitrary ones.) 
+
+% \input{fig_differentiating_workflows}
+
+% 
+% \textit{Example of isolating high variance due to third-party code}:
+% Figure~\ref{fig:isolating_variance_third_party_initial} shows that the
+% response-time variance of \textsc{directory list} requests with
+% identical critical-path traces is high.  The figure shows that the
+% trace edge spanning the metadata server, which stores directory
+% information, is the dominant contributor to the overall variance.
+% Figure~\ref{fig:isolating_variance_third_party_zoomed} shows that
+% enabling tracepoints within the metadata server eventually reveals
+% that the variance emanates from a third-party database that is storing
+% the directory info.
+
+% \input{fig_isolating_variance_third_party}
+
+%\input{fig_workflows}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent\textbf{Principle \#2} Identify requests whose traces have
+identical critical paths, have low variance, but have high response
+times (i.e., are \textit{consistently slow}).  Identify critical-path
+trace edges that are dominant contributors to response times and
+enable tracepoints in the code regions corresponding to
+these areas.
+
+Principle two localizes problems due to slow functions. It addresses
+\textit{R1: automatically enable instrumentation} and \textit{R2:
+  narrow down the search space}.  It is needed because principle one
+identifies slow critical paths, but does not localize slow performance
+to specific code areas.  It is similar to the first principle except
+it focuses on response times and edge latencies directly instead of
+variance.
+
+% \textit{Example}: Requests corresponding to the critical path traces
+% in Figure~\ref{fig:differentiating_workflows_cache_miss} have low
+% variance but have high response times.  The majority contributor to
+% response times is the edge between the \texttt{cache\_miss} tracepoint
+% and the \textit{SN\_end} tracepoint.  Iteratively isolating
+% dominant contributors to overall response times and enabling
+% tracepoints in these areas eventually identifies the function(s) that
+% contribute most to response times.
+
+%encapsulating file
+%accesses are the dominant cause of the observed latency as shown in
+%Figure~\ref{}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent\textbf{Principle \#3} Identify requests whose traces exhibit
+identical critical paths, but which exhibit high variance in their
+response times.  Identify which key/value pairs exposed by
+already-enabled tracepoints correlate highly with requests' response
+time.  Augment tracepoint names with these keys and ranges of their
+values or directly surface them to developers.
+
+Principle three localizes problems related to resource
+usage/availability.  It also differentiates slow critical paths from
+fast ones when keys' values record how much work requests must perform
+(e.g., read/write sizes in a storage system).  It is an enhancement to
+Principle one in that it explores reasons for variation that are not
+due to differences in critical paths themselves, but rather due to
+external factors at the time of requests' execution.
+
+% \textit{Example}: In our example, OpenStack \textsc{CREATE\_VM} requests, which exhibit high variance.
+% The VM\_build\_start function contributes most to variance.  Augment
+% the ``mutex\_queue\_length'' key and ranges of its values (e.g., 0-5,
+% 6-10, > 10) differentiates critical paths as per their queuing times.
+% This localizes the problem to high resource contention in this area.
+
+
+\noindent\textbf{Principle \#4} Maintain a history of the tracepoints
+enabled on behalf of high variance or consistently-slow performance
+along with the statistics that motivated these decisions.  This
+principle allows the framework to explain why it made the decisions it
+did to localize problems (\textit{R3}).
+
+
+\noindent\textbf{Contrast to related work} Many logging frameworks do not
+automatically enable logs or tracepoints~\cite{Erlingsson:2011wy,
+Mace:2015uh} (\cancel{R1}) or are designed to automatically enable
+instrumentation for fail-stop correctness problems
+only~\cite{ArumugaNainar:2010fx, Yuan:2012eh, Yuan:2010ww, Zuo:2016et,
+Zhao:2017co}.  Log2~\cite{Ding:2015td} partially addresses \textit{R1}
+and \textit{R2} by deciding which already-enabled logs to persist in
+storage, not which ones to enable in the first place.  It cannot
+explain its decisions in terms of requests' performance (\cancel{R3})
+because it is oblivious to requests' workflows or critical paths.
+Some logging frameworks~\cite{Zhao:2017co} generically enable logs to
+differentiate unique code paths.  This approach is neither sufficient
+nor necessary for performance diagnosis.  It is insufficient because
+additional logs may be needed to identify where on a code path a
+problem lies; it is not necessary when code paths are fast and need
+not be differentiated.
+

@@ -82,6 +82,9 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{lipsum}
 % \usepackage{minted}
 % \usepackage[ruled,vlined]{algorithm2e}
 % \SetKw{Continue}{continue}
@@ -119,6 +122,9 @@
 
 \newcommand*\STAIF[0]{VAIF} % In case we want to change this later
 \newcommand*\staif[0]{VAIF} % In case we want to change this later
+
+\newenvironment{mycomment}{\begin{quote}\itshape\faComment\quad}{\end{quote}}
+
 %-------------------------------------------------------------------------------
 \begin{document}
 %-------------------------------------------------------------------------------

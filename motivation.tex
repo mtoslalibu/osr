@@ -1,37 +1,47 @@
-This section introduces these challenges and derives requirements that any instrumentation framework should satisfy.
+\textcolor{red}{This section introduces challenges in logging to help diagnose performance problems
+and derives requirements that any instrumentation framework should satisfy. 
+With the key insights, it describes how these requirements can be met
+by combining distributed tracing with control logic that focuses on requests' response-time variance.}
+
+\begin{mycomment}
+  1. Shortened the section introduction and removed request/response based app subsection
+\end{mycomment}
 
 \subsection{Challenges}
+\textcolor{red}{
 Past research has identified three challenges with logging for localizing problems, that is, giving developers strong starting points for their diagnosis efforts ~\cite{Kiciman2005a}. 
 The challenges are: 
 1) No perfect one-size-fits-all logs leading to a tussle between informativeness and cost (e.g., overhead), 
 2) Extremely large log search spaces, and
 3) Data overload leading to a needle-in-the-haystack problem.
+}
 
 We argue that these challenges must be addressed
 separately for correctness and performance problems as logging for these two classes have different goals.
 Logging for correctness must identify the first divergence from normal execution that
 leads to problematic regions in the code ~\cite{ArumugaNainar:2010fx,
 Yuan:2012eh, Yuan:2010ww, Zuo:2016et}. 
-In comparison, logging for performance must identify regions of the code or resource conditions that lead requests' end to end execution to be slow.
+In comparison, logging for performance must identify regions of the code or resource conditions that lead requests to be slow.
 
-We describe the challenges below and identify requirements they impose
-on logging frameworks.
+% We describe the challenges below and identify requirements they impose
+% on logging frameworks.
 
-\noindent\textbf{No perfect one-size-fits-all instrumentation leading to
-  a tussle between logging generality and overhead} 
-  
+% \noindent\textbf{No perfect one-size-fits-all instrumentation leading to
+%   a tussle between logging generality and overhead} 
+
+\noindent\textbf{No perfect one-size-fits-all instrumentation.}
+\\
 Past research has argued that the logs needed to localize the
 source of one problem may not be useful for others~\cite{Mace:2015uh,
   Yuan:2012eh, Zhao:2017co, Vef:2018bx}.  
 The lack of one-size-fits-all logs leads to a tussle to identify which
-log statements are most useful and should be enabled by default.  For
-example, Zhao et al.~\cite{Zhao:2017co} state that Hadoop, HBase, and
+log statements are most helpful and should be enabled by default.  For
+For example, Zhao et al.~\cite{Zhao:2017co} state that Hadoop, HBase, and
 Zookeeper have been patched over 28,821 times over their lifetimes to
 add, remove, or modify static log statements embedded in their code.
 They also point out that the 2,105 revisions that modify logs'
 verbosity levels reflect the tussle between a desire to balance
 overhead and informativeness of log statements.
-
 This challenge results in the following requirement: 
 \begin{description}%[leftmargin=*]
     \itemsep 0 pt
@@ -41,9 +51,10 @@ This challenge results in the following requirement:
   \end{description}
 
 
-  \noindent\textbf{Extremely large logging search spaces} Assume a
-distributed application that allows log points to be inserted or
-enabled at every function's entry, exit, and exceptional return. (This
+  \noindent\textbf{Extremely large logging search spaces.}
+\\
+Assume a distributed application that allows log points to be enabled
+ at every function's entry, exit, and exceptional return. (This
 is similar to the distributed applications used by Mace et
 al.~\cite{Mace:2015uh} and Erlingsson et
 al.~\cite{Erlingsson:2011wy}.)  Here, the possible locations where log
@@ -66,7 +77,8 @@ problems.
   \end{description}
 
 
-  \noindent\textbf{Data overload amounting to needle-in-a-haystack problem}
+  \noindent\textbf{The needle-in-a-haystack problem.}
+  \\
 Existing logging infrastructures capture voluminous amounts of data.
 For example, Facebook's Canopy, a distributed-tracing infrastructure
 captures 1.16 GB/s of trace data and individual traces contain
@@ -74,8 +86,10 @@ captures 1.16 GB/s of trace data and individual traces contain
 when the needed instrumentation is present, can be trying to
 find a needle in a haystack~\cite{Rabkin:2013wy}.
 
-This challenge is partially addressed by \textit{R1 (automatically
-  choose what instrumentation to enable)}.  To avoid the needle-in-haystack
+\textcolor{red}{
+  This challenge is partially addressed by \textit{R1} and \textit{R2}.  
+}
+  To avoid the needle-in-haystack
 problem for cases where there may be multiple problems in the
 application simultaneously, we add the following requirement.
 
@@ -123,44 +137,6 @@ or available to requests, poorly-written algorithms that
 unintentionally increase variance, or third-party code with
 unpredictable performance.
 
-
-% Figure~\ref{fig:dist_app_tracing_background} shows how most
-% distributed-tracing infrastructures work.  \textit{(1)} Tracing
-% infrastructures propagate per-request \textit{context}---unique
-% request IDs and logical clocks---along with requests' execution (shown
-% by the baggage tags in the figure).  \textit{(2)} They tag records of
-% logging points executed by requests with requests' context. (Logging
-% points that record context are called \textit{tracepoints} and shown
-% by rounded rectangles in the figure.)  \textit{(3)} To avoid impacting
-% performance, tracepoint records are cached in fixed-size memory
-% buffers within local \textit{tracing agents}.  They are flushed to a
-% centralized
-% \textit{collector} periodically or when the system is idle.
-% \textit{(4)} Asynchronously, a big-data collects tracepoint records
-% from the collector and orders ones with the same request ID to create
-% traces of requests' workflows.
-
-% Tracepoints contain a name describing the behavior they record (e.g.,
-% \textsc{VM\_LIST\_START}) in OpenStack or \textsc{CACHE\_MISS} in a
-% storage system.  They also contain an arbitrary number of key/value
-% pairs, which are used by developers to record request/function
-% parameters , or information about resources used/available at the time
-% of requests' execution.  %Examples may include queue
-% %lengths at shared resources, the machine on which work is executing,
-% %or the current CPU utilization.
-
-% In this paper, we represent request workflow traces as
-% directed-acyclic graphs in which nodes are tracepoint names and edges
-% are happens-before relationships between events.  Graphs are labeled
-% with requests' response times and edges are labeled with inter-tracepoint
-% latencies.  Fan-outs in the graphs represent concurrent activity
-% and fan-ins represent synchronization.  Hierarchical caller/callee
-% relationships between groups of tracepoints are either represented by
-% additional \textit{hierarchical edges} or inferred by the nesting of
-% START-\newline/END annotations within tracepoint names.  This representation is
-% sufficient to express relationships created by all current tracing
-% infrastructures.
-
 The third insight is that the law of total
 variation~\cite{stats_textbook} can be applied to traces of requests'
 critical paths.  For a set of requests whose trace critical paths
@@ -189,19 +165,27 @@ first is a distributed-tracing infrastructure that allows tracepoints
 to be selectively enabled or disabled during runtime.  The second is a
 control mechanism for distributed tracing that automatically enables
 tracepoints and considers key/value pairs exposed in them
-to \textit{explain} variance as per the insights above.  The control
-logic includes additional principles to diagnose problems that result
+to \textit{explain} variance as per the insights above.  
+The control logic also includes additional principles to diagnose problems that result
 identical critical paths having low variance but are very slow and to
-explain its decisions.  We describe the principles of this control
-mechanism below.  We use the term critical-path traces to refer to the
-critical path portions of requests workflows.  We define identical
-critical path traces as those which execute the same tracepoints in
-the same order and whose nodes have identical names.
+explain its decisions.
+\begin{mycomment}
+  1. Shortened the section introduction by removing second intro paragraph.
+\end{mycomment}
+
+% \textcolor{red}{The control
+% logic includes additional principles to diagnose problems that result
+% identical critical paths having low variance but are very slow and to
+% explain its decisions.  We describe the principles of this control
+% mechanism below.  We use the term critical-path traces to refer to the
+% critical path portions of requests workflows.  We define identical
+% critical path traces as those which execute the same tracepoints in
+% the same order and whose nodes have identical names.}
 
 %\input{table_requirements}
 
 \noindent\textbf{Principle \#1} Identify requests whose traces exhibit
-identical critical paths, but which exhibit high response-time
+identical critical paths with high response-time
 variance. Identify edges of their traces' critical paths that
 contribute most to the variance.  Enable additional tracepoints in
 the code regions corresponding to these areas.
@@ -304,7 +288,7 @@ variance.
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
 \noindent\textbf{Principle \#3} Identify requests whose traces exhibit
-identical critical paths, but which exhibit high variance in their
+identical critical paths with high variance in their
 response times.  Identify which key/value pairs exposed by
 already-enabled tracepoints correlate highly with requests' response
 time.  Augment tracepoint names with these keys and ranges of their
@@ -316,7 +300,7 @@ fast ones when keys' values record how much work requests must perform
 (e.g., read/write sizes in a storage system).  It is an enhancement to
 Principle one in that it explores reasons for variation that are not
 due to differences in critical paths themselves, but rather due to
-external factors at the time of requests' execution.
+external factors at the time of requests' execution \text{red}{(e.g., resource contentions)}.
 
 % \textit{Example}: In our example, OpenStack \textsc{CREATE\_VM} requests, which exhibit high variance.
 % The VM\_build\_start function contributes most to variance.  Augment

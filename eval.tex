@@ -1,3 +1,5 @@
+\mert{Removed all experiments. Only kept intro paragraph below and three case studies from openstack}
+
 \staif{} serves as a fundamental step for developers to
 diagnose performance problems, localizing them to a specific area of
 the system.  We envision that developers will use \staif{} in two ways;
@@ -6,10 +8,11 @@ forest to figure out the performance hypotheses, 2) query the
 hypothesis forest by the request type to inquire about the sources of
 performance problems.
 
+\textcolor{red}{
 This section presents three different case studies of how we used \STAIF{} to
-identify varios performance problems in OpenStack. Openstack is a widely-used distributed application for
+identify various performance problems in OpenStack. Openstack is a widely-used distributed application for
 managing clouds.  We use the OpenStack Stein release.  Our cluster
-consists of 9 Compute and 1 Controller node.
+consists of 9 Compute and 1 Controller node.}
 
 \noindent\textbf{Unpredictable performance of \textsc{VM Delete} requests.}
 In OpenStack, instances can be deleted using the \textsc{VM Delete} command. 
@@ -37,22 +40,20 @@ We corroborate these findings in the bug reports (\cite{listslow1,listslow2}),
 In this case, \staif{} helps diagnose performance problems by isolating latency to (1) a specific service and operation and (2) an inefficient function. 
 The latter case also provides an insight to developers as inefficient tracing (i.e., more tracepoints can be added to the 2000 LoC).
 
-\noindent\textbf{Explaining the resource scarcity.}  
+\noindent\textbf{Explaining the variance with key/value pairs.}  
 % We re-inject the resource-contention problem described
 % in Section ~\ref{sec:motivation:guiding_principles}.  
-We re-inject a problem to show how \staif{} can help debug a resource contation issues.
-
+% We re-inject a problem to show how \staif{} can help debug a resource contation issues.
 In OpenStack \textsc{VM\_CREATE} requests finish creating new OpenStack VMs very slowly. 
 The root cause is that the
 number of concurrent servers that can be created within OpenStack's Nova Service is limited to ten by default. 
 Additional \textsc{VM\_CREATE} requests are forced to wait on a semaphore.
-
 
 \staif{} finds that \textsc{VM Create} groups have high CV ($0.21$) initially.
 \staif{} finds that the highest-variance edge constitutes
 $96\%$ of the variance and 73\% of the response time.  The first
 tracepoint of the highest variance edge ($\_build\_semaphore\_start$)
 is where a nova-compute manager semaphore is acquired.
-Further, \staif{} finds a high correlation between a key-value pair
+Further, \staif{} finds a high correlation between a key/value pair
 exposed by the tracepoint (i.e., the number of simultaneous VM
 creations) and request's latency (R=$0.85$ w/ p-val $10^{-5}$).

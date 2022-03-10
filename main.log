@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.3.3)  10 MAR 2022 10:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.3.3)  10 MAR 2022 10:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -670,6 +670,31 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 \rotheadsize=\dimen296
 \c@nlinenum=\count313
 \TeXr@lab=\toks42
+) (/usr/local/texlive/2021/texmf-dist/tex/latex/todonotes/todonotes.sty
+Package: todonotes 2020/08/18 v1.1.3 Todonotes source and documentation.
+Package: todonotes 2018/11/22
+ (/usr/local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+) (/usr/local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshadows.code.tex
+File: tikzlibraryshadows.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+ (/usr/local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfadings.code.tex
+File: tikzlibraryfadings.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+ (/usr/local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings.code.tex
+File: pgflibraryfadings.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+))) (/usr/local/texlive/2021/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count314
+\calc@Bcount=\count315
+\calc@Adimen=\dimen297
+\calc@Bdimen=\dimen298
+\calc@Askip=\skip69
+\calc@Bskip=\skip70
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count316
+\calc@Cskip=\skip71
+)
+\c@@todonotes@numberoftodonotes=\count317
 )
 
 LaTeX Warning: File `main.bib' already exists on the system.
@@ -678,36 +703,36 @@ LaTeX Warning: File `main.bib' already exists on the system.
 (/Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 129.
-LaTeX Font Info:    Trying to load font information for OMS+pzccm on input line 129.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 132.
+LaTeX Font Info:    Trying to load font information for OMS+pzccm on input line 132.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/omspzccm.fd
 File: omspzccm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/pzccm.
 )
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Info: Redefining \microtypecontext on input line 129.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Info: Redefining \microtypecontext on input line 132.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 129.
+LaTeX Info: Redefining \showhyphens on input line 132.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: Adjustment of interword spacing enabled.
 Package microtype Info: Using default spacing set `alltext-nott'.
@@ -724,16 +749,16 @@ Package microtype Warning: \nonfrenchspacing is active. Adjustment of
 
 (/usr/local/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count314
-\scratchdimen=\dimen297
+\scratchcounter=\count318
+\scratchdimen=\dimen299
 \scratchbox=\box65
-\nofMPsegments=\count315
-\nofMParguments=\count316
+\nofMPsegments=\count319
+\nofMParguments=\count320
 \everyMPshowfont=\toks43
-\MPscratchCnt=\count317
-\MPscratchDim=\dimen298
-\MPnumerator=\count318
-\makeMPintoPDFobject=\count319
+\MPscratchCnt=\count321
+\MPscratchDim=\dimen300
+\MPnumerator=\count322
+\makeMPintoPDFobject=\count323
 \everyMPtoPDFconversion=\toks44
 ) (/usr/local/texlive/2021/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -741,7 +766,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/local/texlive/2021/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 129.
+Package hyperref Info: Link coloring ON on input line 132.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/local/texlive/2021/texmf-dist/tex/latex/refcount/refcount.sty
@@ -749,39 +774,43 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/usr/local/texlive/2021/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count320
+\c@section@level=\count324
 )
-LaTeX Info: Redefining \ref on input line 129.
-LaTeX Info: Redefining \pageref on input line 129.
-LaTeX Info: Redefining \nameref on input line 129.
+LaTeX Info: Redefining \ref on input line 132.
+LaTeX Info: Redefining \pageref on input line 132.
+LaTeX Info: Redefining \nameref on input line 132.
  (/Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/main.out) (/Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for OT1+ptmcm on input line 145.
- (/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/ot1ptmcm.fd
+
+
+Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 132.
+
+LaTeX Font Info:    Trying to load font information for OT1+ptmcm on input line 148.
+(/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/ot1ptmcm.fd
 File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
 )
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `ptmcm' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Trying to load font information for OML+ptmcm on input line 145.
+LaTeX Font Info:    Trying to load font information for OML+ptmcm on input line 148.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/omlptmcm.fd
 File: omlptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ptmcm.
 )
-LaTeX Font Info:    Trying to load font information for OMX+psycm on input line 145.
+LaTeX Font Info:    Trying to load font information for OMX+psycm on input line 148.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/omxpsycm.fd
 File: omxpsycm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/psycm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 145.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 148.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 145.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 148.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 145.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 148.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 ) (/usr/local/texlive/2021/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -802,61 +831,54 @@ Overfull \hbox (0.50308pt too wide) in paragraph at lines 51--67
 
 
 ]) (/Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/motivation.tex
-LaTeX Font Info:    Trying to load font information for U+fontawesomefree0 on input line 6.
- (/usr/local/texlive/2021/texmf-dist/tex/latex/fontawesome5/ufontawesomefree0.fd) [2] [3]) (/Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/design.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [4]
-<figures/marked_A.pdf, id=177, 22.0825pt x 29.10875pt>
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input line 9.
+ [2] [3]) (/Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/design.tex
+<figures/marked_A.pdf, id=185, 22.0825pt x 29.10875pt>
 File: figures/marked_A.pdf Graphic file (type pdf)
 <use figures/marked_A.pdf>
-Package pdftex.def Info: figures/marked_A.pdf  used on input line 62.
+Package pdftex.def Info: figures/marked_A.pdf  used on input line 65.
 (pdftex.def)             Requested size: 11.04121pt x 10.2864pt.
-<figures/marked_B.pdf, id=178, 22.0825pt x 28.105pt>
+<figures/marked_B.pdf, id=186, 22.0825pt x 28.105pt>
 File: figures/marked_B.pdf Graphic file (type pdf)
 <use figures/marked_B.pdf>
-Package pdftex.def Info: figures/marked_B.pdf  used on input line 65.
+Package pdftex.def Info: figures/marked_B.pdf  used on input line 68.
 (pdftex.def)             Requested size: 11.04121pt x 9.78453pt.
-<figures/marked_C.pdf, id=179, 22.0825pt x 29.10875pt>
+<figures/marked_C.pdf, id=187, 22.0825pt x 29.10875pt>
 File: figures/marked_C.pdf Graphic file (type pdf)
 <use figures/marked_C.pdf>
-Package pdftex.def Info: figures/marked_C.pdf  used on input line 66.
+Package pdftex.def Info: figures/marked_C.pdf  used on input line 69.
 (pdftex.def)             Requested size: 11.04121pt x 10.2864pt.
-<figures/fig_staif_design.pdf, id=180, 430.60875pt x 492.84125pt>
+ [4 </Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/figures/marked_A.pdf>]
+<figures/fig_staif_design.pdf, id=206, 430.60875pt x 492.84125pt>
 File: figures/fig_staif_design.pdf Graphic file (type pdf)
 <use figures/fig_staif_design.pdf>
-Package pdftex.def Info: figures/fig_staif_design.pdf  used on input line 75.
+Package pdftex.def Info: figures/fig_staif_design.pdf  used on input line 78.
 (pdftex.def)             Requested size: 241.02039pt x 275.86136pt.
- [5 </Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/figures/fig_staif_design.pdf> </Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/figures/marked_A.pdf> </Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/figures/marked_B.pdf> </Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/figures/marked_C.pdf>]
-<figures/hypo.pdf, id=267, 362.35374pt x 251.94125pt>
+ [5 </Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/figures/fig_staif_design.pdf> </Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/figures/marked_B.pdf> </Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/figures/marked_C.pdf>]
+<figures/hypo.pdf, id=283, 362.35374pt x 251.94125pt>
 File: figures/hypo.pdf Graphic file (type pdf)
 <use figures/hypo.pdf>
-Package pdftex.def Info: figures/hypo.pdf  used on input line 204.
+Package pdftex.def Info: figures/hypo.pdf  used on input line 209.
 (pdftex.def)             Requested size: 241.02039pt x 167.5811pt.
-<figures/blue_bubble.pdf, id=269, 19.07124pt x 13.04875pt>
+<figures/blue_bubble.pdf, id=285, 19.07124pt x 13.04875pt>
 File: figures/blue_bubble.pdf Graphic file (type pdf)
 <use figures/blue_bubble.pdf>
-Package pdftex.def Info: figures/blue_bubble.pdf  used on input line 227.
+Package pdftex.def Info: figures/blue_bubble.pdf  used on input line 232.
 (pdftex.def)             Requested size: 13.34976pt x 7.14227pt.
 File: figures/blue_bubble.pdf Graphic file (type pdf)
 <use figures/blue_bubble.pdf>
-Package pdftex.def Info: figures/blue_bubble.pdf  used on input line 227.
+Package pdftex.def Info: figures/blue_bubble.pdf  used on input line 232.
 (pdftex.def)             Requested size: 13.34976pt x 7.14227pt.
- [6 </Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/figures/hypo.pdf> </Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/figures/blue_bubble.pdf>]
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `pcr' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-
-
-LaTeX Warning: Reference `sec:framework_eval:search_space_scalability' on page 7 undefined on input line 346.
-
-) (/Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/eval.tex [7]) (/Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/main.bbl [8]
+ [6 </Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/figures/hypo.pdf> </Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/figures/blue_bubble.pdf>]) (/Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/eval.tex) (/Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/main.bbl [7]
 Underfull \hbox (badness 2073) in paragraph at lines 112--116
 []\T1/ptm/m/n/10 (+20) Gideon Mann, Mark San-dler, Darja Kru-shevskaja,
  []
 
-
+[8]
 Underfull \hbox (badness 1205) in paragraph at lines 193--198
 []\T1/ptm/m/n/10 (+20) Ding Yuan, Hao-hui Mai, Wei-wei Xiong, Lin Tan,
  []
@@ -867,25 +889,22 @@ Underfull \hbox (badness 1308) in paragraph at lines 200--206
  []
 
 ) [9] (/Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/main.aux)
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: A7F10EC0B5D65BF7E4BBCAEA72CC3A41;2023.
+(rerunfilecheck)             Checksum: DBB7E49AC2FA1ED48665F9D7507AA43F;1588.
  ) 
 Here is how much of TeX's memory you used:
- 27766 strings out of 478994
- 513558 string characters out of 5858185
- 948120 words of memory out of 5000000
- 44264 multiletter control sequences out of 15000+600000
- 488555 words of font info for 346 fonts, out of 8000000 for 9000
+ 28269 strings out of 478994
+ 526571 string characters out of 5858185
+ 947120 words of memory out of 5000000
+ 44755 multiletter control sequences out of 15000+600000
+ 487895 words of font info for 341 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 113i,12n,131p,463b,454s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free0.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/fontawesome5/FontAwesome5Free-Solid.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/main.pdf (9 pages, 444357 bytes).
+ 113i,12n,131p,463b,865s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on /Users/merttoslali/Desktop/fall21/VAIF/osr/submission/osr/main.pdf (9 pages, 438655 bytes).
 PDF statistics:
- 420 PDF objects out of 1000 (max. 8388607)
- 337 compressed objects within 4 object streams
- 68 named destinations out of 1000 (max. 500000)
- 79515 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 436 PDF objects out of 1000 (max. 8388607)
+ 338 compressed objects within 4 object streams
+ 73 named destinations out of 1000 (max. 500000)
+ 79595 words of extra memory for PDF output out of 89155 (max. 10000000)
 

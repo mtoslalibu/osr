@@ -37,18 +37,21 @@ on-path problems.  It also provides value for off-path problems by
 identifying the critical-path areas most affected by them.
 
 %
-The rest of this section describes \STAIF{} in more detail.  
-Our discussions are agnostic to whether tracepoints are enabled or
-disabled using dynamic instrumentation~\cite{Erlingsson:2011wy,
-Cantrill:2004dtrace, Mace:2015uh} or by modifying existing tracing
-infrastructures' tracepoints to execute conditional checks before
-emitting tracepoint records.  We assume tracepoints are uniquely
-addressable.  Some methods for addressing them include using: their
-names (as done for Linux kernel logs); hashes of their names and their
-keys (if names are not unique); an external registry that assigns
-addresses to tracepoints.  We assume unique names from now on.
+\mert{
+  1. Removed last paragraph here (of discussions)
+}
+% The rest of this section describes \STAIF{} in more detail.  
+% Our discussions are agnostic to whether tracepoints are enabled or
+% disabled using dynamic instrumentation~\cite{Erlingsson:2011wy,
+% Cantrill:2004dtrace, Mace:2015uh} or by modifying existing tracing
+% infrastructures' tracepoints to execute conditional checks before
+% emitting tracepoint records.  We assume tracepoints are uniquely
+% addressable.  Some methods for addressing them include using: their
+% names (as done for Linux kernel logs); hashes of their names and their
+% keys (if names are not unique); an external registry that assigns
+% addresses to tracepoints.  We assume unique names from now on.
 
-\subsection{Desing}
+\subsection{Design}
 Figure~\ref{fig:staif_design} shows \STAIF{}'s design, which builds
 upon existing distributed tracing.  It consists of a
 control plane and an instrumentation plane.  Components in the
@@ -115,7 +118,7 @@ effects of new hypotheses because tracepoints records were dropped.
   Concurrency and synchronization may result in multiple paths for a
   single trace, each with different latencies.  The search space names
   all of the tracepoints in the distributed application, including the
-  keys that will be used in grouping.  It also lists tracepoints'
+  keys that will be used in grouping.  It also lists
   concurrency/synchronization tracepoint names as these must be enabled
   for critical-path extraction.
   
@@ -179,7 +182,7 @@ effects of new hypotheses because tracepoints records were dropped.
   terminating, \STAIF{} will disable all of the additional tracepoints
   it enabled.
 
-  \subsection{Control logic \& hypothesis forest}
+  \subsection{Hypothesis forest}
 \label{sec:design:control_logic}
 
 At each cycle, \staif{}'s control logic explores hypotheses of which
@@ -191,11 +194,13 @@ identical critical-path traces with high variance, 2) isolating
 high-variance application areas within groups, or 3) isolating
 application areas that lead to consistently-slow performance.  To
 explain its decisions, it maintains a history of its hypotheses and
-their outcomes in the hypothesis forest.  We describe the hypothesis
-forest first, then how the control logic explores hypotheses and
-constructs the forest.
+their outcomes in the hypothesis forest.  
 
-\subsubsection{Hypothesis forest}
+% We describe the hypothesis
+% forest first, then how the control logic explores hypotheses and
+% constructs the forest.
+
+% \subsubsection{Hypothesis forest}
 
 {
 \begin{figure}[tb]
@@ -241,6 +246,8 @@ independently w/o interference from other hypotheses.  Always-on
 tracepoints are not removed as \STAIF{} does not make hypotheses about
 them.
 
+\mert{Removed control logic pseudo code and walkthrough. We already talked about control logic so far in high level.}
+
 \subsection{Search space \& search strategies}
 \label{sec:design:search_strategies}
 
@@ -248,12 +255,12 @@ them.
 critical paths in requests' workflows when all tracepoints are
 enabled; 2) tracepoints that demarcate concurrency or
 synchronization; 3) keys within tracepoints that should be
-incorporated in grouping and bin ranges for them (needed for $search.key\_value()$).   %MERT: there is no search.augment
-All tracepoints are labeled with whether they are always on. % MERT: do we really need to say this
+incorporated in grouping and bin ranges for them. % (needed for $search.key\_value()$).   %MERT: there is no search.augment
+% All tracepoints are labeled with whether they are always on. % MERT: do we really need to say this
   % (which we assume is a key/value pair).  
 Search strategies use the search space to suggest the next tracepoint to
-enable between high-variance or -latency trace edges (i.e.,
-$search.find()$).  This requires \textit{matching} the group
+enable between high-variance or -latency trace edges.  %(i.e., $search.find()$)
+This requires \textit{matching} the group
 critical-path trace representative against potential critical paths in
 the search space to determine which path it is most likely to be.
 
@@ -286,7 +293,7 @@ potential matches.
 % MERT: following is removed for trimming
 % False matches that include always-on tracepoints that are not contained the group representative trace are discarded.
 We choose among multiple matching potential critical paths randomly
-weighted by frequency of their occurrence during learning.
+\textcolor{red}{(weighted by frequency of their occurrence during learning)}.
 
 
 %strategy iterates the paths in the search space concurrently. For any
@@ -316,55 +323,7 @@ picks a tracepoint that occurs between them.
 Tracepoints are ordered by happens-before
 relationships and binary search is used to pick among them.
 
-\subsection{Limitations \& discussion}
-\label{sec:limitations}
 
-\noindent\textbf{Limitations of using current tracing infrastructures}
-\STAIF{} cannot identify if the observed variance
-is a result of the application code itself or code in lower layers
-(e.g., kernel).  This is because current tracing
-infrastructures are limited to capturing elements of requests' workflows
-in the application only.  In some cases, key/value pairs exposed
-within tracepoints can provide insights into variance coming from
-lower layers (e.g., flow IDs for the network).
-
-\noindent\textbf{Limitations of push-button, statistical approach}
-\STAIF{} cannot provide value for transient or infrequent problems that disappear before developers use \STAIF{}.  Many existing tracing
-infrastructures cannot collect traces for these problems because they
-use a low trace sampling rate~\cite{Sambasivan:2016bo}.  \STAIF{}'s
-approach of enabling tracepoints only when needed may allow for higher
-sampling rates, allowing traces of these problems to be collected with
-always-on tracepoints.
-
-\noindent\textbf{Potential for combinatorial explosion} Such potential exists
-when \STAIF{} is used with applications that have many potential
-critical paths.  In such cases, \STAIF{}'s search strategies will have
-to match against a very large number of paths to choose tracepoints.
-\STAIF{}'s hypothesis forest may contain an excessively large
-number of groups if \STAIF{} must enable many tracepoints or if many
-tracepoints are always
-on. \S~\ref{sec:framework_eval:search_space_scalability} shows that
-matching time is not an issue for the applications and workloads we
-use.  \STAIF{} mitigates explosion in groups by exploring only one
-hypothesis (tracepoint) at a time per branch in the hypothesis forest
-and processing traces to remove tracepoints irrelevant to the current
-hypothesis.
-
-%for OpenStack~\cite{Openstack}, HDFS~\cite{HDFS}, workloads
-%from a large Internet company, and DeathStarBench's social
-%network~\cite{deathstar}.  \STAIF{} mitigates explosion in groups by
-%exploring only request types selected by developers, exploring only
-%one hypothesis (tracepoint) at a time per branch in the hypothesis
-%forest, and processing traces to remove tracepoints irrelevant to the
-%current hypothesis.}
-
-\noindent\textbf{Dealing with asynchronous design patterns} \STAIF{}
-requires additional help to provide value for asynchronous design
-patterns where the latencies of interest are not reflected in critical
-paths' response times.  Developers must establish additional tracing
-edges to stitch together asynchronous patterns' paths (e.g., as done
-using OpenTelemetry's \texttt{link} relationship). 
- They must also identify tracepoints whose timestamps capture the latency of interest.
-% We employed this tactic to capture paths for asynchronous OpenStack
-% requests, such as \textsc{VM\_CREATE} and
-% \textsc{VM\_DELETE}.
+\mert{
+  1) Removed Limitations. 2)
+}

@@ -3,9 +3,10 @@ and derives requirements that any instrumentation framework should satisfy.
 With the key insights, it describes how these requirements can be met
 by combining distributed tracing with control logic that focuses on requests' response-time variance.}
 
-\begin{mycomment}
-  1. Shortened the section introduction and removed request/response based app subsection
-\end{mycomment}
+\mert{
+  1. Shortened the section introduction and removed request/response based app subsection \\
+  2. Refined titles for challenges
+}
 
 \subsection{Challenges}
 \textcolor{red}{
@@ -137,6 +138,10 @@ or available to requests, poorly-written algorithms that
 unintentionally increase variance, or third-party code with
 unpredictable performance.
 
+\mert{
+  1. Removed three paraghs and the figure discusing distributed tracing.
+}
+
 The third insight is that the law of total
 variation~\cite{stats_textbook} can be applied to traces of requests'
 critical paths.  For a set of requests whose trace critical paths
@@ -156,6 +161,7 @@ unknown, potentially problematic behavior resides within the code
 regions that execute between the tracepoints that form these edges.
 
 
+
 \subsection{Addressing the requirements}
 \label{sec:motivation:guiding_principles}
 
@@ -169,9 +175,11 @@ to \textit{explain} variance as per the insights above.
 The control logic also includes additional principles to diagnose problems that result
 identical critical paths having low variance but are very slow and to
 explain its decisions.
-\begin{mycomment}
-  1. Shortened the section introduction by removing second intro paragraph.
-\end{mycomment}
+\mert{
+  1. Shortened the section introduction by removing second intro paragraph. \\
+  2. Removed all the examples (and figures)
+
+}
 
 % \textcolor{red}{The control
 % logic includes additional principles to diagnose problems that result

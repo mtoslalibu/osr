@@ -98,6 +98,7 @@
 % \usepackage{url}
 \usepackage{subcaption}
 \usepackage{makecell}
+\usepackage{todonotes} % for comments
 
 %-------------------------------------------------------------------------------
 \begin{filecontents}{\jobname.bib}
@@ -124,6 +125,8 @@
 \newcommand*\staif[0]{VAIF} % In case we want to change this later
 
 \newenvironment{mycomment}{\begin{quote}\itshape\faComment\quad}{\end{quote}}
+\newcommand{\mert}[1]{\todo[inline,color=green!20!white]{\textbf{Mert:} #1}}
+\newcommand{\raja}[1]{\todo[inline,color=green!20!white]{\textbf{Mert:} #1}}
 
 %-------------------------------------------------------------------------------
 \begin{document}
